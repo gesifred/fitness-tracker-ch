@@ -1,0 +1,35 @@
+{
+    "name": "fitness-tracker",
+    "version": "0.0.1",
+    "description": "An FCC Backend Challenge #4",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js",
+      "test": "jest",
+      "nodemon" :"nodemon server.js"
+    },
+    "dependencies": {
+      "body-parser": "1.20.1",
+      "cors": "2.8.5",
+      "dotenv": "16.0.3",
+      "express": "4.18.2",
+      "mongodb": "4.13.0",
+      "mongoose": "6.8.1"
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/gesifred/shortnr-url-ch.git"
+    },
+    "author": "gesifred",
+    "keywords": [
+      "node",
+      "express"
+    ],
+    "license": "MIT",
+    "devDependencies": {
+      "jest": "29.3.1",
+      "nodemon": "2.0.20",
+      "supertest": "6.3.3"
+    }
+  }
+  

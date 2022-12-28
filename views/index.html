@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Exercise tracker Microservice </title>
+      <link rel="shortcut icon" href="favicon-32x32.png" type="image/x-icon"/>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">      <link href="materialize.min.css" rel="stylesheet" type="text/css">
+      <link type="text/css" rel="stylesheet" href="materialize.min.css"  media="screen,projection"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  </head>
+
+  <body>
+    <div class="container">
+        <nav>
+            <div class="nav-wrapper">
+              <a href="#" class="brand-logo center">Exercise tracker API</a>
+            </div>
+          </nav>
+      <form action="/api/users" method="post">
+        <h3>Create a New User</h3>
+        <p><code>POST /api/users</code></p>
+        <input id="uname" type="text" name="username" placeholder="username" />
+        <input type="submit" value="Submit" />
+      </form>
+      <form id="exercise-form" method="post">
+        <h3>Add exercises</h3>
+        <p><code>POST /api/users/:_id/exercises</code></p>
+        <input id="uid" type="text" name=":_id" placeholder=":_id" />
+        <input id="desc" type="text" name="description" placeholder="description*" />
+        <input id="dur" type="text" name="duration" placeholder="duration* (mins.)" />
+        <input id="date" type="text" name="date" placeholder="date (yyyy-mm-dd)" />
+        <input type="submit" value="Submit" />
+      </form>
+      <p>
+        <strong>GET user's exercise log: </strong>
+        <code>GET /api/users/:_id/logs?[from][&amp;to][&amp;limit]</code>
+      </p>
+      
+      <input id="ident" type="text" placeholder=":id*" />
+      <input id="limit" type="text" placeholder="[limit] ex: 3" />
+      <input id="from" type="text" placeholder="[from] ex: yyyy-mm-dd" />
+      <input id="to" type="text" placeholder="[to] ex: ex: yyyy-mm-dd" />
+      <a id="a_log" class="waves-effect waves-light btn" href="/api/users/id/logs"> <i class="material-icons left">view_timeline</i> logs</a>
+      <p><strong>[ ]</strong> = optional</p>
+      <p><strong>from, to</strong> = dates (yyyy-mm-dd); <strong>limit</strong> = number</p>
+    </div>
+    <footer class="page-footer">
+        <div class="footer-copyright">
+          <div class="container">
+          © 2022 Copyright
+          </div>
+        </div>
+        </footer>
+    <script>
+      const exerciseForm = document.getElementById("exercise-form");
+
+      exerciseForm.addEventListener("submit", () => {
+        const userId = document.getElementById("uid").value;
+        exerciseForm.action = `/api/users/${userId}/exercises`;
+        exerciseForm.submit();
+      });
+
+      const user_id = document.querySelector('#ident');
+      const user_from = document.querySelector('#from');
+      const user_to = document.querySelector('#to');
+      const user_limit = document.querySelector('#limit');
+      const a_log = document.querySelector('#a_log');
+      user_id.addEventListener('change',(e)=>{
+          console.log(e.target.value);
+          let value= "/api/users/id/logs"
+          a_log.href= (value).replace('id',e.target.value);
+      });
+      user_from.addEventListener('change',(e)=>{
+        if(e.target.value!=""){
+            a_log.href= a_log.href+"&from="+e.target.value;
+          }
+      });
+      user_to.addEventListener('change',(e)=>{
+        if(e.target.value!=""){
+            a_log.href= a_log.href+"&to="+e.target.value;
+          } 
+      });
+      user_limit.addEventListener('change',(e)=>{
+          if(e.target.value!=""){
+            a_log.href= a_log.href+"?&limit="+e.target.value;
+          } 
+      });
+    </script>
+    <script type="text/javascript" src="materialize.min.js"></script>
+  </body>
+</html>
